@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center" style="height: 80vh; width: 100%;">
-   <form (ngSubmit)="login()" class="border rounded shadow p-5">
+   <form #loginform="ngForm" (ngSubmit)="login()" class="border rounded shadow p-5">
     <h1 class="text-info mb-4">Login form</h1>
     <div class="mb-3">
         <input type="text" class="form-control" placeholder="email" name="email" [(ngModel)]="email" email required #useremail="ngModel">
@@ -7,11 +7,11 @@
     </div>
     
     <div class="mb-3">
-        <input type="password" class="form-control" placeholder="password" name="pswd" [(ngModel)]="pswd" required pattern="[a-zA-Z0-9]" minlength="4" #userpswd="ngModel">
+        <input type="password" class="form-control" placeholder="password" name="pswd" [(ngModel)]="pswd" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$" minlength="3" #userpswd="ngModel">
         <span *ngIf="userpswd.invalid && userpswd.touched" style="font-size: 10px;" class="text-danger">invalid Password</span>
     </div>
     <div class="mb-3">
-       <button type="submit" class="btn btn-success w-100">login</button>
+       <button [disabled]="loginform.invalid"  type="submit" class="btn btn-success w-100">login</button>
     </div>
    </form>
 </div>
