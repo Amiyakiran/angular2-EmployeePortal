@@ -7,7 +7,7 @@
     </div>
     
     <div class="mb-3">
-        <input type="password" class="form-control" placeholder="password" name="pswd" [(ngModel)]="pswd" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$" minlength="3" #userpswd="ngModel">
+        <input type="password" class="form-control" placeholder="password" name="pswd" [(ngModel)]="pswd" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{4,}$" #userpswd="ngModel">
         <span *ngIf="userpswd.invalid && userpswd.touched" style="font-size: 10px;" class="text-danger">invalid Password</span>
     </div>
     <div class="mb-3">

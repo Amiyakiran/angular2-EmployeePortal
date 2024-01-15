@@ -8,22 +8,26 @@
 
         <form class="border rounded shadow p-5 mt-5 w-75">
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="User Id">
+                <input type="text" class="form-control" placeholder="User Id"name="id" [(ngModel)] = "user.id" #uid="ngModel" required pattern="[0-9]*" >
+                <span *ngIf="uid.invalid && uid.touched" style="font-size: 10px;" class="text-danger">User Id should be a number</span>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Username">
+                <input type="text" class="form-control" placeholder="Username" name="uname" [(ngModel)] = "user.name" #uname="ngModel" required pattern="^[a-zA-Z]{3,}$" >
+                <span *ngIf="uname.invalid && uname.touched" style="font-size: 10px;" class="text-danger">invalid name</span>
             </div>
             <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" placeholder="Email"  name="uemail" [(ngModel)] = "user.email" #uemail="ngModel" required email>
+                <span *ngIf="uemail.invalid && uemail.touched" style="font-size: 10px;" class="text-danger">Invalid email</span>
             </div>
             <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                  <option selected></option>
-                  <option value="1">Active</option>
-                  <option value="0">Inactive</option>
-                  
-                </select>
-                <label for="floatingSelect">Status</label>
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" name="ustatus" [(ngModel)] = "user.active" #uactive="ngModel" required>
+                    <option selected></option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                    
+                  </select>
+                  <label for="floatingSelect">Status</label>
+                  <span *ngIf="uactive.invalid && uactive.touched" style="font-size: 10px;" class="text-danger">invalid status</span>
               </div>
             <div class="mb-3">
                 <button class="btn btn-warning me-3">Cancel</button>
