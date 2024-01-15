@@ -28,4 +28,10 @@ export class UserapiService {
   viewUserApi(id:any){
     return this.http.get(`${this.serverUrl}/users/${id}`) 
   }
+
+  //update user
+  updateuserApi(id:any,user:any){
+    return this.http.put(`${this.serverUrl}/users/${id}`,user) 
+
+  }
 }

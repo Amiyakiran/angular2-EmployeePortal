@@ -9,13 +9,20 @@ import { UserModel } from '../users.model';
 })
 export class UsersListComponent implements OnInit{
  allUsers:UserModel[]=[]
+ adminloginTime :any = new Date
+
+searchKey:string=""
 
   constructor(private api:UserapiService){}
 
   ngOnInit(): void {
+   
+    
     this.getallUsers()
   }
+ 
 
+  
   getallUsers(){
     this.api.getallUsersApi().subscribe({
       next:(res:any)=>{

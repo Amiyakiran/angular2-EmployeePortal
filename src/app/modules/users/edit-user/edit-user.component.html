@@ -30,8 +30,8 @@
                   <span *ngIf="uactive.invalid && uactive.touched" style="font-size: 10px;" class="text-danger">invalid status</span>
               </div>
             <div class="mb-3">
-                <button class="btn btn-warning me-3">Cancel</button>
-               <button class="btn btn-success">update</button>
+                <button (click)="cancelUpadte(user.id)" class="btn btn-warning me-3">Cancel</button>
+               <button class="btn btn-success" (click)="editUser(user.id)">update</button>
             </div>
            </form>
     </div>

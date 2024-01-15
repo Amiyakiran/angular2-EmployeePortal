@@ -8,18 +8,21 @@
             <h2 style="color: rgb(7, 7, 159);">Users List</h2>
             <a routerLink="add" style="text-decoration: none;" class="btn btn-outline-primary pt-2"><i class="fa-solid fa-user-plus me-2"></i>Add</a>
         </div>
+        {{ adminloginTime | date :'shortDate'}}
         <div class="d-flex justify-content-center align-items-center flex-column mt-5 ">
            <div class="d-flex justify-content-between w-100">
                <div class="d-flex w-75">
-                   <input type="text" class="form-control me-2" placeholder="Username">
+
+                   <input type="text" class="form-control me-2" placeholder="Username" name="search" [(ngModel)]="searchKey">
+
                    <div class="dropdown w-100">
                     <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                      sort
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                      <li><a class="dropdown-item" href="#">by Id</a></li>
+                      <li><a class="dropdown-item" href="#">by Name</a></li>
+                   
                     </ul>
                   </div>
                </div>
@@ -39,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of allUsers" [hidden]="user.id=='1' ">
+                        <tr *ngFor="let user of allUsers | search : searchKey " [hidden]="user.id=='1' ">
                             <td class="text-center">{{user.id}}</td>
                             <td class="text-center">{{user.name}}</td>
                             <td class="text-center">{{user.email}}</td>
@@ -49,6 +52,9 @@
                                <i (click)="removeUser(user.id)" class="fa-solid fa-trash ms-3 btn btn-outline-danger"></i>
        
                             </td>
+                        </tr>
+                        <tr *ngIf="(allUsers | search : searchKey).length===0 ">
+                            <p class="text-danger">User doesnot exist</p>
                         </tr>
                     </tbody>
                </table>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserapiService } from '../userapi.service';
 import { UserModel } from '../users.model';
 
@@ -12,7 +12,7 @@ export class EditUserComponent implements OnInit{
 
   user:UserModel={}
 
-  constructor( private route:ActivatedRoute , private api:UserapiService){}
+  constructor( private route:ActivatedRoute , private api:UserapiService, private router:Router){}
 /* ActivatedRoute class is used to get data from url 
 here we need id from the path */
 
@@ -42,6 +42,26 @@ getExistingUser(id:any){
     }
    })
   
+}
+
+//edit user
+editUser(id:any){
+  this.api.updateuserApi(id,this.user).subscribe({
+    next:(res:any)=>{
+      console.log(res);
+      alert('user upadted successfully')
+      this.router.navigateByUrl('/users')
+      
+    },
+    error:(err:any)=>{
+      console.log(err);
+      
+    }
+  })
+}
+//cancel button
+cancelUpadte(id:any){
+  this.getExistingUser(id)
 }
 
 }
