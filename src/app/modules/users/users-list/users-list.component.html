@@ -20,18 +20,18 @@
                      sort
                     </button>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">by Id</a></li>
-                      <li><a class="dropdown-item" href="#">by Name</a></li>
+                      <li><a class="dropdown-item" (click)="sortById()">by Id</a></li>
+                      <li><a class="dropdown-item" (click)="sortByName()">by Name</a></li>
                    
                     </ul>
                   </div>
                </div>
-               <button class="btn btn-success">Export</button>
+               <button (click)="generatePDF()" class="btn btn-success">Export</button>
            </div>
            <div class="row w-100">
             <div class="col-md-1"></div>
             <div class="col-md-10">
-                <table class="table table-bordered shadow border-primary shadow mt-5 rounded">
+                <table class="table table-bordered shadow border-primary shadow mt-5 mb-5 rounded">
                     <thead>
                         <tr class="p-4 table-active">
                             <th  class="py-4 text-center">User ID</th>
@@ -42,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of allUsers | search : searchKey " [hidden]="user.id=='1' ">
+                        <tr *ngFor="let user of allUsers | search : searchKey | paginate: { itemsPerPage: 5, currentPage: p }" [hidden]="user.id=='1' ">
                             <td class="text-center">{{user.id}}</td>
                             <td class="text-center">{{user.name}}</td>
                             <td class="text-center">{{user.email}}</td>
@@ -58,6 +58,7 @@
                         </tr>
                     </tbody>
                </table>
+               <pagination-controls class="text-center" (pageChange)="p = $event"></pagination-controls>
             </div>
             <div class="col-md-1"></div>
            </div>
