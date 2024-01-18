@@ -9,6 +9,10 @@ import { HeaderComponent } from './header/header.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatCardModule} from '@angular/material/card';
+import {MatNativeDateModule} from '@angular/material/core';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatNativeDateModule,
+    HighchartsChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]

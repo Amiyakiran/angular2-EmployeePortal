@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import Swal from 'sweetalert2'
 import { AdminapiService } from '../services/adminapi.service';
 import { Router } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-login',
@@ -33,11 +34,15 @@ export class LoginComponent {
         console.log(res);
        const {email , password} = res
        if(email === this.email  && password ===this.pswd){
+        //save admin details
+        localStorage.setItem("name",res.name)
+        localStorage.setItem("pswd",res.password)
         Swal.fire({
           title: "Wow",
           text: "Login Successful",
           icon: "success"
         });
+      
         //navigate
         this.router.navigateByUrl('dashboard')
        }
