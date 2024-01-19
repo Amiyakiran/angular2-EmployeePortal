@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AdminapiService {
  
 
-  serverUrl ='http://localhost:3000'
+  serverUrl ='https://employeeportal-server-1x5s.onrender.com'
   constructor(private http:HttpClient) { }
 /* BehaviorSubject will allow components to subscribe and receive updates even if they are not present at the time the data is initially set.  */
 /* null is the initial value */

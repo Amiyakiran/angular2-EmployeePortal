@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   Logout(){
     localStorage.removeItem("name")
     localStorage.removeItem("pswd")
- 
+   this.islogin=false
    this.router.navigateByUrl('')
   }
   

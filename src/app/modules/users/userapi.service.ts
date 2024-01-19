@@ -9,7 +9,7 @@ export class UserapiService {
 
   constructor(private http:HttpClient) { }
 
-  serverUrl ='http://localhost:3000'
+  serverUrl ='https://employeeportal-server-1x5s.onrender.com'
 
   addUserDetails(user:UserModel){
    return this.http.post(`${this.serverUrl}/users`,user)

@@ -130,12 +130,12 @@ export class HomeComponent implements OnInit{
     })
  }
 
- logout(){
+ /* logout(){
     localStorage.removeItem("name")
     localStorage.removeItem("pswd")
  
    this.router.navigateByUrl('')
- }
+ } */
  editAdminBtnClicked(){
     this.editAdminStatus = true
 
