@@ -3,6 +3,7 @@ import * as Highcharts from 'highcharts';
 import HC_exporting from 'highcharts/modules/exporting';
 import { UserapiService } from '../modules/users/userapi.service';
 import { Router } from '@angular/router';
+import { AdminapiService } from '../services/adminapi.service';
 
 @Component({
   selector: 'app-home',
@@ -19,9 +20,17 @@ export class HomeComponent implements OnInit{
   adminName:string = ""
   employeeCount:number=0
 
+  /* for admin edit */
+  editAdminStatus:boolean = false
+  /* profile image */
+  profileImg:string='./assets/images/user.png'
+  /* admin details */
+  adminDetils:any={}
+
+
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions = {};
-  constructor( private api:UserapiService , private router:Router){
+  constructor( private api:UserapiService , private router:Router,private adapi:AdminapiService){
     this.chartOptions={
       
     chart: {
@@ -104,6 +113,12 @@ export class HomeComponent implements OnInit{
        this.adminName = localStorage.getItem("name") || ""
       }
      this.totalEmployee() 
+     this.adapi.authenticate().subscribe((res:any)=>{
+     this.adminDetils=res
+     if(res.picture){
+        this.profileImg=res.picture
+     }
+     })
   }
 
  menuBtnClick(){
@@ -121,6 +136,48 @@ export class HomeComponent implements OnInit{
  
    this.router.navigateByUrl('')
  }
+ editAdminBtnClicked(){
+    this.editAdminStatus = true
 
+ }
 
+ getFile(event:any){
+let file = event.target.files[0]
+console.log(file);
+/* to convert into url */
+let fr = new FileReader()
+/* converted */
+fr.readAsDataURL(file)
+/* to get url */
+fr.onload = (event:any)=>{
+    this.profileImg = event.target.result
+    this.adminDetils.picture =this.profileImg
+}
+ }
+ updateAdmin(){
+    this.adapi.updateAdminapi(this.adminDetils).subscribe({
+        next:(res:any)=>{
+            alert('updated successfully')
+             //save admin details
+            localStorage.setItem("name",res.name)
+            localStorage.setItem("pswd",res.password)
+            this.editAdminStatus=false
+            this.adminName = localStorage.getItem("name") || ""
+        },
+        error:(err:any)=>{
+            console.log(err);
+            
+        }
+    })
+ }
+
+ cancel(){
+    this.adapi.authenticate().subscribe((res:any)=>{
+        this.adminDetils=res
+        if(res.picture){
+           this.profileImg=res.picture
+        }
+        })
+    this.editAdminStatus=false
+ }
 }

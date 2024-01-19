@@ -35,8 +35,22 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div style="height: 400px;background-color: aquamarine;" class="rounded">
-                    admin edit
+                <div style="height: 400px;background-color: aquamarine;" class="rounded d-flex justify-content-center align-items-center flex-column">
+                    <img *ngIf="!editAdminStatus" style="border-radius: 50%;" [src]="profileImg" alt="" width="150px" height="150px">
+                    <button *ngIf="!editAdminStatus" class="btn mt-3" (click)="editAdminBtnClicked()">Edit Admin Details <i class="fa-solid fa-pen-nib ms-2"></i></button>
+                    <div *ngIf="editAdminStatus" class="update Details d-flex flex-column justify-content-center align-items-center w-100 p-4">
+                        <h2>Update Admin Details </h2>
+                        <label>
+                            <input (change)="getFile($event)" type="file" style="display: none;">
+                            <img [src]="profileImg" alt="no image"  width="150px" height="150px" style="border-radius: 50%;">
+                        </label>
+                        <input [(ngModel)]="adminDetils.name" type="text" class="form-control mt-3" placeholder="Admin Name">
+                        <input  [(ngModel)]="adminDetils.password" type="text" class="form-control mt-3" placeholder="Admin Password">
+                        <div class="d-flex justify-content-between w-100 mt-3">
+                            <button (click)="cancel()" class="btn btn-outline-warning">cancel</button>
+                            <button (click)="updateAdmin()" class="btn btn-outline-success">Update</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="mt-3 rounded d-flex justify-content-center align-items-center" style="height: 180px ;background-color: rgb(201, 242, 242);">
                     <h1><i class="fa-solid fa-users me-2"></i> Employee Count : {{employeeCount}}</h1>
